@@ -3,13 +3,6 @@ package br.com.dao;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 
- * @author magaton
- *
- * @param <E>
- * @param <ID>
- */
 public interface Dao<E, ID extends Serializable> {
 
 	public void salvar(final E entidade);
