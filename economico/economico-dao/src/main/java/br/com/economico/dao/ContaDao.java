@@ -8,12 +8,12 @@ import br.com.economico.modelo.ContaTipo;
 
 public class ContaDao extends JPADao<Conta, Integer> {
 
-	public ContaDao() {
-		super(Conta.class);
-	}
+    public ContaDao() {
+	super(Conta.class);
+    }
 
-	public List<Conta> buscarPorTipo(final ContaTipo tipo) {
-		return null;
-	}
+    public List<Conta> buscarPorTipo(final ContaTipo tipo) {
+	return null;
+    }
 
 }

@@ -5,14 +5,14 @@ import java.util.List;
 
 public interface Dao<E, ID extends Serializable> {
 
-	public void salvar(final E entidade);
+    public void atualizar(final E entidade);
 
-	public void atualizar(final E entidade);
+    public E buscarPorId(final ID chave);
 
-	public void remover(final E entidade);
+    public List<E> buscarTodos();
 
-	public E buscarPorId(final ID chave);
+    public void remover(final E entidade);
 
-	public List<E> buscarTodos();
+    public void salvar(final E entidade);
 
 }
