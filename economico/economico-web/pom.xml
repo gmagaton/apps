@@ -9,6 +9,6 @@
 
 	<artifactId>economico-web</artifactId>
 	<name>Economico - web</name>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 </project>

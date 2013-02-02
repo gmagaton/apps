@@ -13,11 +13,30 @@
 		<module>economico-dao</module>
 		<module>economico-servico</module>
 		<module>economico-web</module>
+		<module>economico-ejb</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.testng.version>6.8</org.testng.version>
+		<hsqldb.version>1.8.0.10</hsqldb.version>
 	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${org.testng.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
 
 	<build>
 		<pluginManagement>

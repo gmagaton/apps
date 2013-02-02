@@ -1,19 +1,25 @@
 package br.com.economico.dao;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import br.com.dao.JPADao;
+import javax.persistence.metamodel.SingularAttribute;
+
+import br.com.dao.JPADaoImp;
+import br.com.economico.metamodelo.Lancamento_;
 import br.com.economico.modelo.Lancamento;
 
-public class LancamentoDao extends JPADao<Lancamento, Integer> {
+public class LancamentoDao extends JPADaoImp<Lancamento, Integer> {
 
     public LancamentoDao() {
 	super(Lancamento.class);
     }
 
     public List<Lancamento> buscarPorData(final Calendar data) {
-	return null;
+	final Map<SingularAttribute<Lancamento, ?>, Object> filtro = new HashMap<SingularAttribute<Lancamento, ?>, Object>();
+	filtro.put(Lancamento_.data, data);
+	return buscarComFiltro(filtro);
     }
-
 }
