@@ -3,6 +3,8 @@ package br.com.economico.modelo;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
+import br.com.dao.modelo.Entidade;
+
 public class Lancamento extends Entidade {
 
     private static final long serialVersionUID = 1L;

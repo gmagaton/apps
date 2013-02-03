@@ -5,8 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import br.com.economico.modelo.Entidade;
-
 @Entity
 @Table(name = "TB_MINHA_ENTIDADE")
 public class MinhaEntidade extends Entidade {

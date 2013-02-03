@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
+import br.com.dao.modelo.Entidade;
+
 @Entity(name = "CONTA")
 @SequenceGenerator(allocationSize = 1, initialValue = 1, name = "GERADOR_SQ_CONTA", sequenceName = "SQ_CONTA")
 public class Conta extends Entidade {

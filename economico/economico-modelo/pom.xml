@@ -11,11 +11,12 @@
 	<name>Economico - modelo</name>
 	<packaging>jar</packaging>
 
+
 	<dependencies>
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-			<version>3.6.10.Final</version>
+			<groupId>economico</groupId>
+			<artifactId>economico-dao</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 	</dependencies>
 </project>

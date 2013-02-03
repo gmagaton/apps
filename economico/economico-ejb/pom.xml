@@ -6,9 +6,36 @@
 		<artifactId>economico</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
-	
+
 	<groupId>economico-ejb</groupId>
 	<artifactId>economico-ejb</artifactId>
 	<name>Economico - ejb</name>
-	<packaging>jar</packaging>
+	<packaging>ejb</packaging>
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>economico</groupId>
+			<artifactId>economico-servico</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<ejbVersion>3.1</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

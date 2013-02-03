@@ -16,7 +16,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
-import br.com.economico.modelo.Entidade;
+import br.com.dao.modelo.Entidade;
 
 public class JPADaoImp<E extends Entidade, ID extends Serializable> implements JPADao<E, ID> {
 

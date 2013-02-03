@@ -11,4 +11,11 @@
 	<name>Economico - servico</name>
 	<packaging>jar</packaging>
 
+	<dependencies>
+		<dependency>
+			<groupId>economico</groupId>
+			<artifactId>economico-modelo</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
 </project>

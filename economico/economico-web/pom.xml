@@ -9,6 +9,16 @@
 
 	<artifactId>economico-web</artifactId>
 	<name>Economico - web</name>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
