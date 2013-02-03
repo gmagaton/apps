@@ -4,3 +4,6 @@
 /.project
 /.classpath
 /test-output
+/mem.properties
+/mem.script
+/mem.log

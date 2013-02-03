@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,7 +20,8 @@ import br.com.economico.modelo.Entidade;
 
 public class JPADaoImp<E extends Entidade, ID extends Serializable> implements JPADao<E, ID> {
 
-    private EntityManager entityManager;
+    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("PUEconomico");
+    private EntityManager em;
 
     private final Class<E> clazz;
 
@@ -30,6 +33,11 @@ public class JPADaoImp<E extends Entidade, ID extends Serializable> implements J
     public void atualizar(final E entidade) {
 	getEntityManager().merge(entidade);
 	getEntityManager().flush();
+    }
+
+    public void beginTransaction() {
+	em = emf.createEntityManager();
+	em.getTransaction().begin();
     }
 
     @Override
@@ -62,6 +70,19 @@ public class JPADaoImp<E extends Entidade, ID extends Serializable> implements J
 	return query.getResultList();
     }
 
+    public void closeTransaction() {
+	em.close();
+    }
+
+    public void commit() {
+	em.getTransaction().commit();
+    }
+
+    public void commitAndCloseTransaction() {
+	commit();
+	closeTransaction();
+    }
+
     private List<Predicate> createFilters(final Map<SingularAttribute<E, ?>, Object> filtro, final CriteriaBuilder builder, final Root<E> root) {
 	final List<Predicate> predicates = new ArrayList<Predicate>();
 
@@ -75,8 +96,17 @@ public class JPADaoImp<E extends Entidade, ID extends Serializable> implements J
 	return predicates;
     }
 
+    public void flush() {
+	em.flush();
+    }
+
     public EntityManager getEntityManager() {
-	return entityManager;
+	return em;
+    }
+
+    public void joinTransaction() {
+	em = emf.createEntityManager();
+	em.joinTransaction();
     }
 
     @Override
@@ -85,14 +115,14 @@ public class JPADaoImp<E extends Entidade, ID extends Serializable> implements J
 	getEntityManager().flush();
     }
 
+    public void rollback() {
+	em.getTransaction().rollback();
+    }
+
     @Override
     public void salvar(final E entidade) {
 	getEntityManager().persist(entidade);
 	getEntityManager().flush();
-    }
-
-    public void setEntityManager(final EntityManager entityManager) {
-	this.entityManager = entityManager;
     }
 
 }

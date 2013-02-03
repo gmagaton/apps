@@ -4,14 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import br.com.dao.modelo.MinhaEntidade;
@@ -20,30 +17,16 @@ import br.com.dao.modelo.MinhaEntidade_;
 
 public class JPADaoTest {
 
-    private MinhaEntidadeDao dao;
+    private final MinhaEntidadeDao dao = new MinhaEntidadeDao();
 
-    private static EntityManagerFactory mEmf;
-    /** The entity manager that persists and queries the DB. */
-    private static EntityManager mEntityManager;
-
-    /**
-     * Cleans up the session.
-     */
-    @AfterClass
-    public void closeTestFixture() {
-	mEntityManager.getTransaction().commit();
-	mEntityManager.close();
-	mEmf.close();
+    @AfterTest
+    public void finalizar() {
+	dao.commitAndCloseTransaction();
     }
 
-    @BeforeClass
-    public void initTestFixture() throws Exception {
-	// Get the entity manager for the tests.
-	mEmf = Persistence.createEntityManagerFactory("PUDaoTest");
-	mEntityManager = mEmf.createEntityManager();
-	mEntityManager.getTransaction().begin();
-	dao = new MinhaEntidadeDao();
-	dao.setEntityManager(mEntityManager);
+    @BeforeTest
+    public void iniciar() {
+	dao.beginTransaction();
     }
 
     @Test
