@@ -11,8 +11,8 @@ import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
 
 import br.com.dao.JPADaoImp;
-import br.com.economico.metamodelo.Lancamento_;
 import br.com.economico.modelo.Lancamento;
+import br.com.economico.modelo.Lancamento_;
 
 public class LancamentoDao extends JPADaoImp<Lancamento, Integer> {
 

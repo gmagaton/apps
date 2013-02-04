@@ -1,55 +1,82 @@
 package br.com.economico.modelo;
 
-import java.math.BigDecimal;
 import java.util.Calendar;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import br.com.dao.modelo.Entidade;
 
+@Entity
+@Table(name = "LANCAMENTO")
+@SequenceGenerator(allocationSize = 1, initialValue = 1, name = "GERADOR_SQ_LANCAMENTO", sequenceName = "SQ_LANCAMENTO")
 public class Lancamento extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GERADOR_SQ_LANCAMENTO")
+    @Column(name = "ID")
     private final Integer id;
-    private Conta lancamentoTipo;
+
+    @Column(name = "ID_CONTA")
+    private Conta conta;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATA")
     private Calendar data;
-    private BigDecimal valor;
+
+    @Column(name = "VALOR")
+    private Double valor;
 
     Lancamento() {
 	super();
 	id = null;
     }
 
-    public Lancamento(Conta lancamentoTipo) {
+    public Lancamento(final Conta conta) {
 	this();
-	this.setLancamentoTipo(lancamentoTipo);
+	setConta(conta);
     }
 
     @Override
-    public boolean equals(Object obj) {
-	if (this == obj)
+    public boolean equals(final Object obj) {
+	if (this == obj) {
 	    return true;
-	if (obj == null)
+	}
+	if (obj == null) {
 	    return false;
-	if (getClass() != obj.getClass())
+	}
+	if (getClass() != obj.getClass()) {
 	    return false;
-	Lancamento other = (Lancamento) obj;
+	}
+	final Lancamento other = (Lancamento) obj;
 	if (id == null) {
-	    if (other.id != null)
+	    if (other.id != null) {
 		return false;
-	} else if (!id.equals(other.id))
+	    }
+	} else if (!id.equals(other.id)) {
 	    return false;
+	}
 	return true;
+    }
+
+    public Conta getConta() {
+	return conta;
     }
 
     public Calendar getData() {
 	return data;
     }
 
-    public Conta getLancamentoTipo() {
-	return lancamentoTipo;
-    }
-
-    public BigDecimal getValor() {
+    public Double getValor() {
 	return valor;
     }
 
@@ -57,19 +84,19 @@ public class Lancamento extends Entidade {
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
-	result = prime * result + ((id == null) ? 0 : id.hashCode());
+	result = prime * result + (id == null ? 0 : id.hashCode());
 	return result;
     }
 
-    public void setData(Calendar data) {
+    public void setConta(final Conta conta) {
+	this.conta = conta;
+    }
+
+    public void setData(final Calendar data) {
 	this.data = data;
     }
 
-    public void setLancamentoTipo(Conta lancamentoTipo) {
-	this.lancamentoTipo = lancamentoTipo;
-    }
-
-    public void setValor(BigDecimal valor) {
+    public void setValor(final Double valor) {
 	this.valor = valor;
     }
 

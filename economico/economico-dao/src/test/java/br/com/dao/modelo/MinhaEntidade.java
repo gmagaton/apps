@@ -1,20 +1,26 @@
 package br.com.dao.modelo;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TB_MINHA_ENTIDADE")
+@Table(name = "MINHA_ENTIDADE")
 public class MinhaEntidade extends Entidade {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue
+    @Column(name = "ID")
     private Integer id;
+
+    @Column(name = "DESCRICAO")
     private String descricao;
+
+    @Column(name = "ATIVO")
     private boolean ativo;
 
     MinhaEntidade() {

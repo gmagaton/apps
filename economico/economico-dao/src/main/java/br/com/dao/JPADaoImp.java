@@ -1,6 +1,7 @@
 package br.com.dao;
 
 import java.io.Serializable;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,8 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.metamodel.SingularAttribute;
+
+import org.hibernate.internal.SessionImpl;
 
 import br.com.dao.modelo.Entidade;
 
@@ -98,6 +101,11 @@ public class JPADaoImp<E extends Entidade, ID extends Serializable> implements J
 
     public void flush() {
 	em.flush();
+    }
+
+    public Connection getConnection() {
+	final SessionImpl session = (SessionImpl) getEntityManager().getDelegate();
+	return session.connection();
     }
 
     public EntityManager getEntityManager() {

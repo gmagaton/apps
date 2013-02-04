@@ -7,9 +7,9 @@ import java.util.Map;
 import javax.persistence.metamodel.SingularAttribute;
 
 import br.com.dao.JPADaoImp;
-import br.com.economico.metamodelo.Conta_;
 import br.com.economico.modelo.Conta;
 import br.com.economico.modelo.ContaTipo;
+import br.com.economico.modelo.Conta_;
 
 public class ContaDao extends JPADaoImp<Conta, Integer> {
 
