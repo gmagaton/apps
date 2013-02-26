@@ -11,6 +11,7 @@
 	<name>Economico - web</name>
 	<packaging>war</packaging>
 
+
 	<build>
 		<plugins>
 			<plugin>
@@ -21,4 +22,12 @@
 		</plugins>
 	</build>
 
+	<dependencies>
+		<dependency>
+			<groupId>economico-ejb</groupId>
+			<artifactId>economico-ejb</artifactId>
+			<version>${project.version}</version>
+			<type>ejb</type>
+		</dependency>
+	</dependencies>
 </project>

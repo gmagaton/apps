@@ -23,13 +23,14 @@ import br.com.dao.modelo.Entidade;
 
 public class JPADaoImp<E extends Entidade, ID extends Serializable> implements JPADao<E, ID> {
 
-    private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("PUEconomico");
+    private final EntityManagerFactory emf;
     private EntityManager em;
 
     private final Class<E> clazz;
 
     public JPADaoImp(final Class<E> clazz) {
 	this.clazz = clazz;
+	emf = Persistence.createEntityManagerFactory("PUEconomico");
     }
 
     @Override

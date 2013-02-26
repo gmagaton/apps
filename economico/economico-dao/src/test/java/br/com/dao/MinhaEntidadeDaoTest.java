@@ -4,45 +4,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
 import javax.persistence.metamodel.SingularAttribute;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import br.com.dao.modelo.MinhaEntidade;
 import br.com.dao.modelo.MinhaEntidadeDao;
 import br.com.dao.modelo.MinhaEntidade_;
-import br.com.dao.test.JPADBUnitTest;
 
-public class MinhaEntidadeDaoTest extends JPADBUnitTest {
+public class MinhaEntidadeDaoTest {
 
-    MinhaEntidadeDao dao = new MinhaEntidadeDao();
+    private final MinhaEntidadeDao dao = new MinhaEntidadeDao();
+    private final String xmlPath = "/dbunit/minha-entidade-dbunit.xml";
 
-    @AfterTest
-    public void finalizar() {
+    @AfterMethod
+    public void finish() throws Exception {
+	dao.beginTransaction();
+
+	final DBUnitLoader loader = DBUnitLoader.getInstance(dao.getEntityManager());
+	loader.limpar(xmlPath);
+
 	dao.commitAndCloseTransaction();
     }
 
-    @Override
-    protected EntityManager getEntityManager() {
-	return dao.getEntityManager();
-    }
-
-    @Override
-    protected String getXmlPath() {
-	return "/dbunit/minha-entidade-dbunit.xml";
-    }
-
-    @BeforeTest
-    public void iniciar() {
+    @BeforeMethod
+    public void start() throws Exception {
 	dao.beginTransaction();
+
+	final DBUnitLoader loader = DBUnitLoader.getInstance(dao.getEntityManager());
+	loader.carregarXml(xmlPath);
+
+	dao.commitAndCloseTransaction();
     }
 
     @Test
     public void testAtualizar() {
+	dao.beginTransaction();
+
 	// buscar para atualizar
 	final MinhaEntidade entidadeBuscada = dao.buscarPorId(1);
 	Assert.assertFalse(entidadeBuscada.getDescricao().equals("NOVA ENTIDADE"));
@@ -56,10 +57,14 @@ public class MinhaEntidadeDaoTest extends JPADBUnitTest {
 	Assert.assertNotNull(entidadeAtualizada);
 	Assert.assertEquals(entidadeAtualizada.getDescricao(), "NOVA ENTIDADE");
 	Assert.assertFalse(entidadeAtualizada.isAtivo());
+
+	dao.commitAndCloseTransaction();
     }
 
     @Test
     public void testBuscarComFiltro() {
+	dao.beginTransaction();
+
 	final Map<SingularAttribute<MinhaEntidade, ?>, Object> filtro = new HashMap<SingularAttribute<MinhaEntidade, ?>, Object>();
 	filtro.put(MinhaEntidade_.descricao, "ENTIDADE 3");
 	filtro.put(MinhaEntidade_.ativo, false);
@@ -67,12 +72,18 @@ public class MinhaEntidadeDaoTest extends JPADBUnitTest {
 
 	Assert.assertNotNull(resultado);
 	Assert.assertEquals(resultado.size(), 1);
+
+	dao.commitAndCloseTransaction();
     }
 
     @Test
     public void testSalvar() {
+	dao.beginTransaction();
+
 	final MinhaEntidade entidade = new MinhaEntidade("MINHA ENTIDADE", true);
 	dao.salvar(entidade);
 	Assert.assertNotNull(entidade.getId());
+
+	dao.commitAndCloseTransaction();
     }
 }

@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import br.com.economico.dao.LancamentoDao;
+import br.com.economico.modelo.ContaTipo;
 import br.com.economico.modelo.Lancamento;
 
 @Stateless
@@ -16,12 +17,20 @@ public class LancamentoFacadeBean implements LancamentoFacadeLocal, LancamentoFa
     private LancamentoDao dao;
 
     @Override
+    public List<Lancamento> buscarLancamentosCreditoDoDia() {
+	final Calendar data = Calendar.getInstance();
+	return dao.buscarPorContaTipoEData(ContaTipo.CREDITO, data);
+    }
+
+    @Override
+    public List<Lancamento> buscarLancamentosDebitoDoDia() {
+	final Calendar data = Calendar.getInstance();
+	return dao.buscarPorContaTipoEData(ContaTipo.DEBITO, data);
+    }
+
+    @Override
     public List<Lancamento> buscarLancamentosDoDia() {
 	final Calendar data = Calendar.getInstance();
-	data.clear(Calendar.HOUR_OF_DAY);
-	data.clear(Calendar.MINUTE);
-	data.clear(Calendar.SECOND);
-	data.clear(Calendar.MILLISECOND);
 	return dao.buscarPorData(data);
     }
 }
