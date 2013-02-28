@@ -13,6 +13,12 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>6.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>economico</groupId>
 			<artifactId>economico-modelo</artifactId>
 			<version>${project.version}</version>

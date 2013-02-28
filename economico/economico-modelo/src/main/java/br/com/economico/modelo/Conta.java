@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -31,15 +33,21 @@ public class Conta extends Entidade {
     @Column(name = "TIPO")
     private ContaTipo tipo;
 
+    @ManyToOne
+    @JoinColumn(name = "PERFIL_ID")
+    private Perfil perfil;
+
     Conta() {
 	super();
 	setId(null);
+	setPerfil(null);
     }
 
-    public Conta(final String descricao, final ContaTipo tipo) {
+    public Conta(final String descricao, final ContaTipo tipo, final Perfil perfil) {
 	this();
 	this.descricao = descricao;
 	this.tipo = tipo;
+	this.perfil = perfil;
     }
 
     @Override
@@ -72,6 +80,10 @@ public class Conta extends Entidade {
 	return id;
     }
 
+    public Perfil getPerfil() {
+	return perfil;
+    }
+
     public ContaTipo getTipo() {
 	return tipo;
     }
@@ -88,8 +100,12 @@ public class Conta extends Entidade {
 	this.descricao = descricao;
     }
 
-    public void setId(final Integer id) {
+    private void setId(final Integer id) {
 	this.id = id;
+    }
+
+    public void setPerfil(final Perfil perfil) {
+	this.perfil = perfil;
     }
 
     public void setTipo(final ContaTipo tipo) {
