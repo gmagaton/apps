@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="layout" template="/WEB-INF/jsp/layout/layout_bootstrap.jsp">
+		<put-attribute name="title" value="Java Web RESTFull" />
+		<put-attribute name="menu" value="/WEB-INF/jsp/layout/menu.jsp" />
+		<put-attribute name="body" value="" />
+	</definition>
+
+	<definition name="index" extends="layout">
+		<put-attribute name="pageTitle" value="Início" />
+		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
+	</definition>
+
+	<definition name="master" extends="layout">
+		<put-attribute name="pageTitle" value="Master" />
+		<put-attribute name="body" value="/WEB-INF/jsp/master.jsp" />
+	</definition>
+	
+	<definition name="detalhe" extends="layout">
+		<put-attribute name="pageTitle" value="Detalhe" />
+		<put-attribute name="body" value="/WEB-INF/jsp/detalhe.jsp" />
+	</definition>
+	
+	<definition name="master_detalhes" extends="layout">
+		<put-attribute name="pageTitle" value="Detalhes do Master" />
+		<put-attribute name="body" value="/WEB-INF/jsp/master_detalhes.jsp" />
+	</definition>
+
+	<definition name="lista_master" extends="layout">
+		<put-attribute name="pageTitle" value="Lista de Master" />
+		<put-attribute name="body" value="/WEB-INF/jsp/lista_master.jsp" />
+	</definition>
+
+	<definition name="lista_detalhe" extends="layout">
+		<put-attribute name="pageTitle" value="Lista de Detalhe" />
+		<put-attribute name="body" value="/WEB-INF/jsp/lista_detalhe.jsp" />
+	</definition>
+
+</tiles-definitions>

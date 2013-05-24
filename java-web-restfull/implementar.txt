@@ -1,0 +1,14 @@
+	//DetalheController
+	
+	@RequestMapping(value = "/{detalheId}", method = RequestMethod.GET)
+    public String buscarPorId(@PathVariable final Integer detalheId, final Model model) {
+	final Detail detalhe = masterDetalheService.buscarDetalhePorId(detalheId);
+	model.addAttribute("detalhe", detalhe);
+	return "detalhe";
+    }
+
+    @RequestMapping(value = "/{detalheId}", method = RequestMethod.DELETE)
+    public ModelAndView removerPorId(@PathVariable final Integer detalheId, final Model model) {
+	masterDetalheService.removerDetalhe(detalheId);
+	return detalhes();
+    }
